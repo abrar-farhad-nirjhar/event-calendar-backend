@@ -7,10 +7,17 @@ console.log(window.location)
 
 socket.onmessage = function(e){
     console.log("message", e)
+    
 }
 socket.onopen = function(e){
     console.log("message", e)
+    document.getElementById('iii').addEventListener('click',(event)=>{
+        socket.send("hello")
+    })
+    
 }
+
+
 socket.onerror = function(e){
     console.log("message", e)
 }

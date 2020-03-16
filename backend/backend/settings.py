@@ -72,6 +72,11 @@ TEMPLATES = [
     },
 ]
 
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+    },
+}
 # WSGI_APPLICATION = 'backend.wsgi.application'
 os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
 
