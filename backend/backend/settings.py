@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'w+ow$7+dewacl8gl^33elpu$+p*)_@s2bub@#ah6c*e(*%ipxb'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -90,6 +90,20 @@ DATABASES = {
     }
 }
 
+
+# DATABASES = {
+#    'default': {
+#       'ENGINE' : 'djongo',
+      
+#        'NAME' : 'newdb', #as named on server
+      
+#        'HOST' : 'mongodb+srv://abrar:fGgjDsJcL51utdJ7@cluster0-wzqww.mongodb.net/test?retryWrites=true&w=majority',
+# #that is your connection link with your username,password and db name,here i created a db using mlabs of mongodb
+#        'USER' : 'abrar',
+#        'PASSWORD' : 'fGgjDsJcL51utdJ7',
+
+#    }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators

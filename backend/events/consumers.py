@@ -15,8 +15,7 @@ from django.dispatch import receiver
 
 class EventConsumer(AsyncConsumer):
     async def websocket_connect(self,event):
-        print("connected")
-        print(self.channel_layer)
+        
         await self.send({
             "type":"websocket.accept"
         })
@@ -39,7 +38,12 @@ class EventConsumer(AsyncConsumer):
     
     async def websocket_receive(self,event):
         if event is not None:
-            print("receive", event)
+            # print("receive", event)
+
+            data = event['text']
+            data = json.loads(data)
+            await self.handleEvent(data)
+            
             await self.send_data()
         
 
@@ -49,7 +53,33 @@ class EventConsumer(AsyncConsumer):
     @database_sync_to_async
     def events(self):
         today = datetime.datetime.today()
-        return Event.objects.filter(day__gte=today)
+        return Event.objects.filter()
+    
+    @database_sync_to_async
+    def handleEvent(self, data):
+        
+        if data.get('id') is not None:
+            if data.get('action'):
+                print("hakuna matata")
+                event = Event.objects.filter(pk=data.get('id')).first()
+                print(event)
+                event.delete()
+            else:
+                event = Event.objects.filter(pk=data.get('id')).first()
+                event.username = data.get('username')
+                event.event_name = data.get('event_name')
+                event.event_description = data.get('event_description')
+                event.save()
+                
+        else:
+            
+            event = Event()
+            event.username = data.get('username')
+            event.event_name = data.get('event_name')
+            event.event_description = data.get('event_description')
+            event.day = data.get('day')
+            event.save()
+            
 
     
     @staticmethod   
@@ -59,10 +89,7 @@ class EventConsumer(AsyncConsumer):
         channel_layer = channels.layers.get_channel_layer()
         print("hakuna")
         print(channel_layer)
-        # channel_layer.send('event',{
-        #     "type":"websocket.send",
-        #     "data": "hakuna matata"
-        # })
+        
         async_to_sync(channel_layer.send)("message",{
             "text":"hakuna"
         })
