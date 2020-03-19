@@ -34,3 +34,20 @@ Now it is running at localhost:8000
 1. localhost:8000/api/events -> api of all events
 2. localhost:8000/api/upcoming -> api of all upcoming events
 3. localhost:8000/eventConsumer -> Socket link which is called in the react project
+
+# Thought Process
+
+Here my main goal was to make everything real time. I created the APIs using Django Rest Framework, I added the endpoints above then I read the email again and noticed that I was told to use sockets, so i didn't delete any of the Code but I had to implement Channels. 
+
+# CREATE
+
+When data is sent to the server if there is no ID present in the request body then an object is created
+
+# EDIT
+When ID is present in the request body but no 'action' element then it takes the data retrieves the object with pk ID and updates that object.
+
+# DELETE
+When ID is present and 'action' is DELETE then the object with the pk ID is retrieved and deleted.
+
+# READ 
+Now this was done in two ways, when an initial handshake is made with the react socket then immediately all the event data is sent. Then after that, when any kind of modification is made like new object being created, or object being edited, and object being deleted, then immediately the modified set of data is sent through the socket to the client which is the Javascript REACT portion.
