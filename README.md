@@ -18,7 +18,7 @@ After cloning you need to setup python environment
 8. Now frontend can be used. 
 
 
-#Linux
+# Linux
 1. pip3 install virtualenv
 2. virtualenv venv
 3. (a folder named venv will be created) 
@@ -30,7 +30,7 @@ After cloning you need to setup python environment
 
 
 Now it is running at localhost:8000
-#endpoints
+# Endpoints
 1. localhost:8000/api/events -> api of all events
 2. localhost:8000/api/upcoming -> api of all upcoming events
 3. localhost:8000/eventConsumer -> Socket link which is called in the react project
