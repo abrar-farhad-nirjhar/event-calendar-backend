@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
+import mongoengine
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -23,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'w+ow$7+dewacl8gl^33elpu$+p*)_@s2bub@#ah6c*e(*%ipxb'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -39,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'events',
-    'channels'
+    'channels',
+    'rest_framework_mongoengine'
 ]
 
 MIDDLEWARE = [
@@ -91,12 +93,29 @@ DATABASES = {
 }
 
 
+# DATABASES = { 
+#      'default': {
+#           'ENGINE': 'django.db.backends.dummy' 
+#      }
+# }
+
+# MONGO_USER = 'abrar'
+# MONGO_PASS = 'fGgjDsJcL51utdJ7'
+# # MONGO_HOST =
+# MONGO_NAME = 'newdb'
+# # MONGO_DATABASE_HOST = \
+# # ‘mongodb://%s:%s@%s/%s’ \
+# # % (MONGO_USER, MONGO_PASS, MONGO_HOST, MONGO_NAME)
+# mongoengine.connect(
+#     MONGO_NAME, host='mongodb+srv://abrar:fGgjDsJcL51utdJ7@cluster0-wzqww.mongodb.net/test?retryWrites=true&w=majority')
+
+
 # DATABASES = {
 #    'default': {
 #       'ENGINE' : 'djongo',
-      
+
 #        'NAME' : 'newdb', #as named on server
-      
+
 #        'HOST' : 'mongodb+srv://abrar:fGgjDsJcL51utdJ7@cluster0-wzqww.mongodb.net/test?retryWrites=true&w=majority',
 # #that is your connection link with your username,password and db name,here i created a db using mlabs of mongodb
 #        'USER' : 'abrar',
